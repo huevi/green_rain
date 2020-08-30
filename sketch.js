@@ -1,6 +1,8 @@
 var streams = [];
 var fadeInterval = 1.6;
 var symbolSize = 14;
+var tamil_u = [0x0B83,0x0B85,0x0B86,0x0B87,0x0B88,0x0B89,0x0B8A,0x0B8E,0x0B8F,0x0B90,0x0B92,0x0B93,0x0B94,0x0B95,0x0B99,0x0B9A,0x0B9C,0x0B9E,0x0B9F,0x0BA3,0x0BA4,0x0BA8,0x0BA9,0x0BAA,0x0BAE,0x0BAF,0x0BB0,0x0BB1,0x0BB2,0x0BB3,0x0BB4,0x0BB5,0x0BB7,0x0BB8,0x0BB9];
+
 
 function setup() {
   createCanvas(
@@ -22,7 +24,7 @@ function setup() {
 }
 
 function draw() {
-  background(0, 150);
+  background(11, 15, 36);
   streams.forEach(function(stream) {
     stream.render();
   });
@@ -40,12 +42,12 @@ function Symbol(x, y, speed, first, opacity) {
   this.switchInterval = round(random(2, 25));
 
   this.setToRandomSymbol = function() {
-    var charType = round(random(0, 5));
+    var charType = round(random(2, 5));
     if (frameCount % this.switchInterval == 0) {
       if (charType > 1) {
         // set it to Katakana
         this.value = String.fromCharCode(
-          0x30A0 + floor(random(0, 97))
+          tamil_u[floor(random(0,33))] 
         );
       } else {
         // set it to numeric
@@ -62,8 +64,8 @@ function Symbol(x, y, speed, first, opacity) {
 
 function Stream() {
   this.symbols = [];
-  this.totalSymbols = round(random(5, 35));
-  this.speed = random(5, 22);
+  this.totalSymbols = round(random(5, 40));
+  this.speed = random(5, 7);
 
   this.generateSymbols = function(x, y) {
     var opacity = 255;
@@ -87,9 +89,9 @@ function Stream() {
   this.render = function() {
     this.symbols.forEach(function(symbol) {
       if (symbol.first) {
-        fill(140, 255, 170, symbol.opacity);
+        fill(100, 150, 100, symbol.opacity);
       } else {
-        fill(0, 255, 70, symbol.opacity);
+        fill(61, 100, 61, symbol.opacity);
       }
       text(symbol.value, symbol.x, symbol.y);
       symbol.rain();
