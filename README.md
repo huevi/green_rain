@@ -1,3 +1,3 @@
 # matrix_Rain
 
-![](matrix_rain.gif)
+![](matrix_digital_rain.gif)
